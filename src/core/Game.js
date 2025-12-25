@@ -1,5 +1,5 @@
 import {InputManager} from "./InputManager.js";
-import {Renderer} from "../utils/Renderer.js";
+import {Renderer} from "./Renderer.js";
 
 export class Game {
     constructor(canvas, width, height) {
