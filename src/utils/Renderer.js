@@ -16,6 +16,11 @@ export class Renderer {
         this.ctx.fillRect(0, 0, this.width, this.height)
     }
 
+    drawText(x, y, text, colour) {
+        this.ctx.fillStyle = colour
+        this.ctx.fillText(text, x, y)
+    }
+
     drawPolygon(points, colour) {
         this.ctx.fillStyle = colour
         this.ctx.beginPath()
