@@ -39,7 +39,7 @@ Tickets live in `/tickets/` as markdown files:
 
 ## Current Ticket
 
-**TICKET-0003: Input Manager** - Keyboard and mouse input handling
+**TICKET-0004: Game Loop & Game Class** - Fixed timestep loop and main Game orchestrator
 
 ## Commands
 

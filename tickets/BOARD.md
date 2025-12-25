@@ -6,7 +6,6 @@
 ## To Do
 
 ### Core Engine
-- **0003** - Input Manager
 - **0004** - Game Loop & Game Class
 
 ### Gameplay
@@ -27,5 +26,6 @@
 
 ## Complete
 
+- **0003** - Input Manager
 - **0002** - Vector2 & Renderer
 - **0001** - Project Setup

@@ -1,19 +1,19 @@
 # TICKET-0003: Input Manager
 
 ## Status
-[ ] Not Started
+[x] Complete
 
 ## Description
 Create the InputManager to track keyboard and mouse state. Uses a polling approach - check input state each frame rather than reacting to events directly.
 
 ## Acceptance Criteria
-- [ ] `InputManager` class that listens for keyboard and mouse events
-- [ ] `isKeyHeld(code)` returns true while key is pressed
-- [ ] `isKeyPressed(code)` returns true only on the first frame key is pressed
-- [ ] `getMousePosition()` returns {x, y} relative to canvas
-- [ ] `isMouseButtonDown(button)` returns true while mouse button is held
-- [ ] `endFrame()` method to reset per-frame state
-- [ ] Test: log key presses and mouse position to console
+- [x] `InputManager` class that listens for keyboard and mouse events
+- [x] `isKeyHeld(code)` returns true while key is pressed
+- [x] `isKeyPressed(code)` returns true only on the first frame key is pressed
+- [x] `getMousePosition()` returns {x, y} relative to canvas
+- [x] `isMouseButtonDown(button)` returns true while mouse button is held
+- [x] `endFrame()` method to reset per-frame state
+- [x] Test: log key presses and mouse position to console
 
 ## Technical Notes
 
