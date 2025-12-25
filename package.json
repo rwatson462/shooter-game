@@ -1,0 +1,24 @@
+{
+  "name": "shooter",
+  "version": "1.0.0",
+  "description": "A top-down space shooter game",
+  "main": "main/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rwatson462/shooter-game.git"
+  },
+  "author": "Rob Watson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rwatson462/shooter-game/issues"
+  },
+  "homepage": "https://github.com/rwatson462/shooter-game#readme",
+  "devDependencies": {
+    "electron": "^39.2.7"
+  }
+}
