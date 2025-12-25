@@ -1,10 +1,11 @@
+import { Renderer } from './utils/Renderer.js';
 
 const canvas = document.getElementById('canvas');
 
-canvas.width = 1280;
-canvas.height = 720;
+const WIDTH = 1280;
+const HEIGHT = 720;
 
-const ctx = canvas.getContext('2d');
+const renderer = new Renderer(canvas, WIDTH, HEIGHT)
 
-ctx.fillStyle = '#000';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+renderer.clear('#000')
+renderer.drawRect(WIDTH / 4, HEIGHT / 4, 100, 50, '#c96')
