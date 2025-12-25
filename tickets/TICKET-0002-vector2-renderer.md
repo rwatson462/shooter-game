@@ -1,19 +1,19 @@
 # TICKET-0002: Vector2 & Renderer
 
 ## Status
-[ ] Not Started
+[x] Complete
 
 ## Description
 Create the Vector2 math utility and Renderer canvas wrapper. These are the building blocks for positioning and drawing everything in the game.
 
 ## Acceptance Criteria
-- [ ] `Vector2` class with: constructor, add, subtract, multiply, magnitude, normalize
-- [ ] `Vector2.distance(a, b)` static method
-- [ ] `Renderer` class wrapping the canvas 2D context
-- [ ] `Renderer.clear(color)` fills screen with background color
-- [ ] `Renderer.drawCircle(x, y, radius, color)` draws filled circle
-- [ ] `Renderer.drawRect(x, y, width, height, color)` draws filled rectangle
-- [ ] Test: manually draw some shapes on screen to verify renderer works
+- [x] `Vector2` class with: constructor, add, subtract, multiply, magnitude, normalize
+- [x] `Vector2.distance(a, b)` static method
+- [x] `Renderer` class wrapping the canvas 2D context
+- [x] `Renderer.clear(color)` fills screen with background color
+- [x] `Renderer.drawCircle(x, y, radius, color)` - replaced with `drawPolygon()` for flexibility
+- [x] `Renderer.drawRect(x, y, width, height, color)` draws filled rectangle
+- [x] Test: manually draw some shapes on screen to verify renderer works
 
 ## Technical Notes
 

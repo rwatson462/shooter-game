@@ -39,7 +39,7 @@ Tickets live in `/tickets/` as markdown files:
 
 ## Current Ticket
 
-**TICKET-0002: Vector2 & Renderer** - Math utility and canvas wrapper
+**TICKET-0003: Input Manager** - Keyboard and mouse input handling
 
 ## Commands
 
@@ -47,6 +47,17 @@ Tickets live in `/tickets/` as markdown files:
 npm install    # Install dependencies
 npm start      # Run the game
 ```
+
+## PM Notes
+
+Reminders for Claude when managing this project:
+
+- **Keep tickets small** - Each ticket should be a discrete deliverable, completable in one session
+- **Split large tickets** - If a ticket has 3+ unrelated acceptance criteria, consider splitting
+- **Update BOARD.md** - Keep the board in sync when tickets change status
+- **Review before approving** - Always check code against acceptance criteria
+- **Create tickets proactively** - Don't wait to be asked; identify and create tickets as needed
+- **Graphics come after wireframes** - Get gameplay working with shapes first, polish later
 
 ## Project Structure
 
