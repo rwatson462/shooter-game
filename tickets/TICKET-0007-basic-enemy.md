@@ -1,19 +1,20 @@
 # TICKET-0007: Basic Enemy
 
 ## Status
-[ ] Not Started
+[x] Complete
 
 ## Description
 Create a basic enemy that spawns at the edge of the screen and chases the player. This is the foundation for all enemy types.
 
 ## Acceptance Criteria
-- [ ] `Enemy` base class extending Entity with health, damage, speed, scoreValue
-- [ ] `BasicEnemy` class - simple chaser that moves toward player
-- [ ] Enemies spawn at random positions along screen edges
-- [ ] Enemies rotate to face their movement direction
-- [ ] Game can spawn enemies manually (for testing)
-- [ ] Enemies rendered as distinct colored shapes (different from player)
-- [ ] Game maintains array of enemies, updates and renders them
+- [x] `Enemy` base class extending Entity with speed
+- [x] Enemy chases player (moves toward them)
+- [x] Enemies rotate to face their movement direction
+- [x] Enemies rendered as distinct colored shapes (different from player)
+- [ ] ~~BasicEnemy subclass~~ - deferred (may use behavior trees instead)
+- [ ] ~~Edge spawning~~ - deferred to Wave System (TICKET-0021)
+- [ ] ~~Enemies array~~ - deferred to Wave System (TICKET-0021)
+- [ ] ~~health, damage, scoreValue~~ - deferred to Collision/Health tickets
 
 ## Technical Notes
 

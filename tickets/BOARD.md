@@ -5,11 +5,12 @@
 
 ## To Do
 
-### Gameplay
-- [**0007** - Basic Enemy](TICKET-0007-basic-enemy.md)
+### Gameplay (Core Loop)
 - [**0008** - Collision System](TICKET-0008-collision-system.md)
 - [**0009** - Player Health & Damage](TICKET-0009-player-health.md)
 - [**0010** - Score System](TICKET-0010-score-system.md)
+- [**0020** - Game States](TICKET-0020-game-states.md)
+- [**0021** - Wave System](TICKET-0021-wave-system.md)
 
 ### Graphics & Polish
 - [**0011** - Asset Loader](TICKET-0011-asset-loader.md)
@@ -21,11 +22,13 @@
 
 ## Backlog
 
+- [**0019** - Player Movement Rework](TICKET-0019-player-movement-rework.md)
 - [**0018** - Camera System](TICKET-0018-camera-system.md)
 - [**0017** - Fixed Timestep Game Loop](TICKET-0017-fixed-timestep.md)
 
 ## Complete
 
+- [**0007** - Basic Enemy](TICKET-0007-basic-enemy.md)
 - [**0006** - Shooting System](TICKET-0006-shooting-system.md)
 - [**0005** - Player Character](TICKET-0005-player-character.md)
 - [**0004** - Game Loop & Game Class](TICKET-0004-game-loop.md)
