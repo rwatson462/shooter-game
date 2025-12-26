@@ -3,7 +3,16 @@ import {Vector2} from "../utils/Vector2.js";
 
 export class Player extends Entity {
     constructor(x, y) {
-        super(x, y, 20, 5, 50);
+        super(x, y, 20, 5, 100);
+    }
+
+    takeDamage(damage) {
+        this.health = Math.max(this.health - damage, 0)
+
+        if (this.health === 0) {
+            console.log('Game over, motherfucker ❌')
+            this.active = false
+        }
     }
 
     /**

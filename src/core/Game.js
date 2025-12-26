@@ -3,7 +3,7 @@ import {Renderer} from "./Renderer.js";
 import {Player} from "./Player.js";
 import {ProjectileManager} from "./ProjectileManager.js";
 import {Enemy} from "./Enemy.js";
-import {CollisionSystem} from "./CollisionSystem.js";
+import {collisionHandler} from "../utils/collisionHandler.js";
 
 export class Game {
     constructor(canvas, width, height) {
@@ -13,14 +13,18 @@ export class Game {
         this.height = height
         this.inputManager = new InputManager(canvas)
         this.projectileManager = new ProjectileManager()
-        this.collisionSystem = new CollisionSystem()
         this.renderer = new Renderer(canvas, width, height)
         this.started = false
     }
 
     initLevel() {
         this.player = new Player(this.width/2, this.height/2)
-        this.enemy = new Enemy(this.width/2, 100, 20)
+        this.enemies = [
+            new Enemy(this.width/2, 100, 20),
+            new Enemy(this.width/2, this.height-100, 20),
+            new Enemy(100, this.height/2, 20),
+            new Enemy(this.width-100, this.height/2, 20),
+        ]
         this.projectileManager.clear()
     }
 
@@ -43,24 +47,36 @@ export class Game {
          * UPDATE
          */
 
-        this.player.handleUserInput(delta, this.inputManager, this.projectileManager)
-        this.projectileManager.update(delta)
-        if (this.enemy.active) {
-            this.enemy.update(this.player)
+        if (this.player.active) {
+            this.player.handleUserInput(delta, this.inputManager, this.projectileManager)
         }
 
-        this.collisionSystem.update(this.player, this.projectileManager.projectiles, [this.enemy])
+        this.projectileManager.update(delta)
+
+        this.enemies.forEach(enemy => {
+            if (enemy.active) {
+                enemy.update(this.player)
+            }
+        })
+
+        collisionHandler(this.player, this.projectileManager.projectiles, this.enemies)
 
         /**
          * RENDER
          */
         this.renderer.clear('#111')
 
-        this.player.render(this.renderer)
-        this.projectileManager.render(this.renderer)
-        if (this.enemy.active) {
-            this.enemy.render(this.renderer)
+        if (this.player.active) {
+            this.player.render(this.renderer)
         }
+
+        this.projectileManager.render(this.renderer)
+
+        this.enemies.forEach(enemy => {
+            if (enemy.active) {
+                enemy.render(this.renderer)
+            }
+        })
 
         // draw the framerate
         this.renderer.drawText(10, 10, `Framerate: ${framerate}`, '#aaa');
