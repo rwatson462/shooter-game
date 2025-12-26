@@ -29,7 +29,7 @@ export class Vector2 {
         const mag = this.magnitude()
         return mag > 0
             ? this.divide(mag)
-            : null
+            : new Vector2(0,0)
     }
 
     static distance(vector1, vector2) {

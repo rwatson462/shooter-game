@@ -1,5 +1,6 @@
 import {InputManager} from "./InputManager.js";
 import {Renderer} from "./Renderer.js";
+import {Player} from "./Player.js";
 
 export class Game {
     constructor(canvas, width, height) {
@@ -10,6 +11,10 @@ export class Game {
         this.inputManager = new InputManager(canvas)
         this.renderer = new Renderer(canvas, width, height)
         this.started = false
+    }
+
+    initLevel() {
+        this.player = new Player(this.width/2, this.height/2)
     }
 
     start() {
@@ -31,14 +36,16 @@ export class Game {
          * UPDATE
          */
 
-        // any updating required here
+        this.player.handleUserInput(delta, this.inputManager)
 
         /**
          * RENDER
          */
-        this.renderer.clear('#000')
-        this.renderer.drawRect(this.width / 4, this.height / 4, 100, 50, '#c96')
+        this.renderer.clear('#111')
 
+        this.player.render(this.renderer)
+
+        // draw the framerate
         this.renderer.drawText(10, 10, `Framerate: ${framerate}`, '#aaa');
 
         /**
@@ -49,6 +56,9 @@ export class Game {
             // potentially change the screen after this
             this.stop()
         }
+
+        // reset the input manager's keyPressed information
+        this.inputManager.endFrame()
 
         this.lastFrameTime = timestamp;
         if (this.started) {

@@ -22,14 +22,15 @@ export class Renderer {
     }
 
     drawPolygon(points, colour) {
-        this.ctx.fillStyle = colour
+        this.ctx.strokeStyle = colour
         this.ctx.beginPath()
         this.ctx.moveTo(points[0].x, points[0].y)
-        for (let point of points) {
+        for (let i = 1; i < points.length; i++) {
+            const point = points[i]
             this.ctx.lineTo(point.x, point.y)
         }
         this.ctx.closePath()
-        this.ctx.fill()
+        this.ctx.stroke()
     }
 
     drawRect(x, y, w, h, colour) {
@@ -40,5 +41,12 @@ export class Renderer {
             new Vector2(x, y + h),
         ]
         this.drawPolygon(points, colour)
+    }
+
+    drawLine(x1, y1, x2, y2, colour) {
+        this.ctx.strokeStyle = colour
+        this.ctx.moveTo(x1, y1)
+        this.ctx.lineTo(x2, y2)
+        this.ctx.stroke()
     }
 }
