@@ -1,7 +1,7 @@
 # TICKET-0009: Player Health & Damage
 
 ## Status
-[ ] Not Started
+[~] In Progress
 
 ## Description
 Add health system to the player. Enemies damage the player on contact, with brief invincibility after taking damage.

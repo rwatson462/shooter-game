@@ -1,18 +1,18 @@
 # TICKET-0008: Collision System
 
 ## Status
-[ ] Not Started
+[x] Complete
 
 ## Description
 Implement circle-based collision detection between game entities. Bullets should destroy enemies on hit.
 
 ## Acceptance Criteria
-- [ ] `CollisionSystem` class with static `checkCollision(a, b)` method
-- [ ] Circle-circle collision detection (compare distance vs radii sum)
-- [ ] System checks player bullets against enemies each frame
-- [ ] Bullets deactivate when hitting an enemy
-- [ ] Enemies deactivate when hit (health system comes later)
-- [ ] Collision system integrated into Game update loop
+- [x] `CollisionSystem` class with static `checkCollision(a, b)` method
+- [x] Circle-circle collision detection (compare distance vs radii sum)
+- [x] System checks player bullets against enemies each frame
+- [x] Bullets deactivate when hitting an enemy
+- [x] Enemies deactivate when hit (health system comes later)
+- [x] Collision system integrated into Game update loop
 
 ## Technical Notes
 
