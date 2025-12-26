@@ -3,12 +3,13 @@ import {clamp} from "../utils/clamp.js";
 import {Projectile} from "./Projectile.js";
 
 export class Entity {
-    constructor(x, y, size, maxSpeed) {
+    constructor(x, y, size, maxSpeed, health) {
         // the world-position of the centre of this entity
         this.position = new Vector2(x, y);
 
         this.speed = 0
         this.maxSpeed = maxSpeed
+
 
         // start pointing up, perhaps make this a parameter later
         this.direction = new Vector2(0,1)
@@ -17,8 +18,18 @@ export class Entity {
         // will be used for collision detection and drawing
         this.halfSize = size/2
 
+        this.health = health
+
         this.maxBullets = 5
         this.currentBullets = 0
+    }
+
+    takeDamage(damage) {
+        this.health = Math.min(this.health - damage, 0)
+
+        if (this.health === 0) {
+            this.active = false
+        }
     }
 
     pointAt(x, y) {

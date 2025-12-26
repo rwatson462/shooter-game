@@ -3,7 +3,7 @@ import {Vector2} from "../utils/Vector2.js";
 
 export class Player extends Entity {
     constructor(x, y) {
-        super(x, y, 20, 5);
+        super(x, y, 20, 5, 50);
     }
 
     /**
@@ -60,5 +60,7 @@ export class Player extends Entity {
             nose.y,
             '#f66'
         )
+
+        renderer.drawText(this.position.x, this.position.y, `${this.health}`, '#fff')
     }
 }
