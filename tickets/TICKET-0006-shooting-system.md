@@ -1,19 +1,19 @@
 # TICKET-0006: Shooting System
 
 ## Status
-[~] In Progress
+[x] Complete
 
 ## Description
 Add the ability for the player to shoot bullets. Clicking the mouse fires a bullet in the direction the player is facing. Implement a basic weapon system with fire rate limiting.
 
 ## Acceptance Criteria
-- [ ] `Bullet` class extending Entity with speed, damage, owner
-- [ ] Bullets spawn at player position and travel in facing direction
-- [ ] Left mouse click fires a bullet
-- [ ] Fire rate limited (can't hold mouse to spam - ~3 shots/second for pistol)
-- [ ] Bullets despawn when leaving screen bounds
-- [ ] Bullets rendered as small colored shapes
-- [ ] Game maintains array of active bullets, updates and renders them
+- [x] `Bullet` class extending Entity with speed, damage, owner
+- [x] Bullets spawn at player position and travel in facing direction
+- [x] Left mouse click fires a bullet
+- [x] Fire rate limited (can't hold mouse to spam - ~3 shots/second for pistol)
+- [x] Bullets despawn when leaving screen bounds - implemented via lifetime
+- [x] Bullets rendered as small colored shapes
+- [x] Game maintains array of active bullets, updates and renders them
 
 ## Technical Notes
 
@@ -91,7 +91,7 @@ class Game {
     }
 
     spawnBullet(x, y, rotation) {
-        this.bullets.push(new Bullet(x, y, rotation));
+        this.bullets.push(new Projectile(x, y, rotation));
     }
 
     update(deltaTime) {

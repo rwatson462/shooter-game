@@ -39,7 +39,7 @@ Tickets live in `/tickets/` as markdown files:
 
 ## Current Ticket
 
-**TICKET-0006: Shooting System** - Bullets and weapon fire rate
+**TICKET-0007: Basic Enemy** - Chaser enemy with edge spawning
 
 ## Commands
 

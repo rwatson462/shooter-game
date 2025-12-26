@@ -2,7 +2,6 @@
 
 ## In Progress
 
-- [**0006** - Shooting System](TICKET-0006-shooting-system.md)
 
 ## To Do
 
@@ -27,6 +26,7 @@
 
 ## Complete
 
+- [**0006** - Shooting System](TICKET-0006-shooting-system.md)
 - [**0005** - Player Character](TICKET-0005-player-character.md)
 - [**0004** - Game Loop & Game Class](TICKET-0004-game-loop.md)
 - [**0003** - Input Manager](TICKET-0003-input-manager.md)
