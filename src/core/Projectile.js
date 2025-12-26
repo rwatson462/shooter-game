@@ -21,7 +21,7 @@ export class Projectile {
         this.owner = owner
 
         // Given a lack of collision system, we'll give bullets a lifetime that when they hit, they'll die
-        this.lifetime = 1000
+        this.lifetime = 2000
         this.active = true
     }
 

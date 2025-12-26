@@ -10,14 +10,15 @@ export class Entity {
         this.speed = 0
         this.maxSpeed = maxSpeed
 
-
         // start pointing up, perhaps make this a parameter later
         this.direction = new Vector2(0,1)
         this.strafe = new Vector2(0, 0)
 
         // will be used for collision detection and drawing
+        this.size = size
         this.halfSize = size/2
 
+        this.active = true
         this.health = health
 
         this.maxBullets = 5
@@ -25,7 +26,7 @@ export class Entity {
     }
 
     takeDamage(damage) {
-        this.health = Math.min(this.health - damage, 0)
+        this.health = Math.max(this.health - damage, 0)
 
         if (this.health === 0) {
             this.active = false

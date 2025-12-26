@@ -3,6 +3,7 @@ import {Renderer} from "./Renderer.js";
 import {Player} from "./Player.js";
 import {ProjectileManager} from "./ProjectileManager.js";
 import {Enemy} from "./Enemy.js";
+import {CollisionSystem} from "./CollisionSystem.js";
 
 export class Game {
     constructor(canvas, width, height) {
@@ -12,6 +13,7 @@ export class Game {
         this.height = height
         this.inputManager = new InputManager(canvas)
         this.projectileManager = new ProjectileManager()
+        this.collisionSystem = new CollisionSystem()
         this.renderer = new Renderer(canvas, width, height)
         this.started = false
     }
@@ -43,7 +45,11 @@ export class Game {
 
         this.player.handleUserInput(delta, this.inputManager, this.projectileManager)
         this.projectileManager.update(delta)
-        this.enemy.update(this.player)
+        if (this.enemy.active) {
+            this.enemy.update(this.player)
+        }
+
+        this.collisionSystem.update(this.player, this.projectileManager.projectiles, [this.enemy])
 
         /**
          * RENDER
@@ -52,7 +58,9 @@ export class Game {
 
         this.player.render(this.renderer)
         this.projectileManager.render(this.renderer)
-        this.enemy.render(this.renderer)
+        if (this.enemy.active) {
+            this.enemy.render(this.renderer)
+        }
 
         // draw the framerate
         this.renderer.drawText(10, 10, `Framerate: ${framerate}`, '#aaa');
