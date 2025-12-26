@@ -1,6 +1,7 @@
 import {InputManager} from "./InputManager.js";
 import {Renderer} from "./Renderer.js";
 import {Player} from "./Player.js";
+import {ProjectileManager} from "./ProjectileManager.js";
 
 export class Game {
     constructor(canvas, width, height) {
@@ -9,12 +10,14 @@ export class Game {
         this.width = width
         this.height = height
         this.inputManager = new InputManager(canvas)
+        this.projectileManager = new ProjectileManager()
         this.renderer = new Renderer(canvas, width, height)
         this.started = false
     }
 
     initLevel() {
         this.player = new Player(this.width/2, this.height/2)
+        this.projectileManager.clear()
     }
 
     start() {
@@ -36,7 +39,8 @@ export class Game {
          * UPDATE
          */
 
-        this.player.handleUserInput(delta, this.inputManager)
+        this.player.handleUserInput(delta, this.inputManager, this.projectileManager)
+        this.projectileManager.update(delta)
 
         /**
          * RENDER
@@ -44,6 +48,7 @@ export class Game {
         this.renderer.clear('#111')
 
         this.player.render(this.renderer)
+        this.projectileManager.render(this.renderer)
 
         // draw the framerate
         this.renderer.drawText(10, 10, `Framerate: ${framerate}`, '#aaa');

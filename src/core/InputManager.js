@@ -41,7 +41,12 @@ export class InputManager {
     }
 
     onMouseDown(evt) {
-        this.heldKeys.add(`Mouse${evt.which}`)
+        const code = `Mouse${evt.which}`
+
+        if (!this.heldKeys.has(code)) {
+            this.pressedKeys.add(code)
+            this.heldKeys.add(code)
+        }
     }
 
     onMouseUp(evt) {
@@ -63,7 +68,7 @@ export class InputManager {
     }
 
     isMouseButtonPressed(button) {
-        return this.heldKeys.has(`Mouse${button}`)
+        return this.pressedKeys.has(`Mouse${button}`)
     }
 
     getMousePosition() {

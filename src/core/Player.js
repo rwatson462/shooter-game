@@ -6,7 +6,12 @@ export class Player extends Entity {
         super(x, y, 20, 5);
     }
 
-    handleUserInput(delta, inputManager) {
+    /**
+     * @param {number} delta
+     * @param {InputManager} inputManager
+     * @param {ProjectileManager} projectileManager
+     */
+    handleUserInput(delta, inputManager, projectileManager) {
         // todo: introduce a minimum turning circle so the Player doesn't "snap" to point at the mouse
         this.strafe = new Vector2(0, 0)
         this.pointAt(inputManager.mouseX, inputManager.mouseY)
@@ -27,6 +32,10 @@ export class Player extends Entity {
         }
         if (inputManager.isKeyHeld('KeyA')) {
             this.strafeLeft()
+        }
+
+        if (inputManager.isKeyPressed('Space') || inputManager.isMouseButtonPressed(1)) {
+            this.fire(projectileManager)
         }
 
         // apply previous movement changes to current position
