@@ -39,7 +39,7 @@ Tickets live in `/tickets/` as markdown files:
 
 ## Current Ticket
 
-**TICKET-0004: Game Loop & Game Class** - Fixed timestep loop and main Game orchestrator
+**TICKET-0006: Shooting System** - Bullets and weapon fire rate
 
 ## Commands
 

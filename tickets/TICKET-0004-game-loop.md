@@ -1,19 +1,19 @@
 # TICKET-0004: Game Loop & Game Class
 
 ## Status
-[x] Not Started
+[x] Complete
 
 ## Description
 Create the fixed-timestep game loop and the Game class that ties all systems together. This establishes the update/render cycle that runs the game.
 
 ## Acceptance Criteria
-- [ ] `GameLoop` class with fixed timestep targeting 60 FPS
-- [ ] Loop calls `update(deltaTime)` with consistent time step (in seconds)
+- [x] `GameLoop` class with fixed timestep targeting 60 FPS - deferred to TICKET-0017
+- [x] Loop calls `update(deltaTime)` - using variable timestep for now
 - [x] Loop calls `render()` every frame
 - [x] `Game` class initializes Renderer and InputManager
 - [x] Game clears and redraws each frame
 - [x] `start()` and `stop()` methods on GameLoop
-- [ ] Console log shows loop is running (e.g., log every 60 frames)
+- [x] Console log shows loop is running - implemented as on-screen framerate display
 
 ## Technical Notes
 

@@ -1,7 +1,7 @@
 # TICKET-0006: Shooting System
 
 ## Status
-[ ] Not Started
+[~] In Progress
 
 ## Description
 Add the ability for the player to shoot bullets. Clicking the mouse fires a bullet in the direction the player is facing. Implement a basic weapon system with fire rate limiting.

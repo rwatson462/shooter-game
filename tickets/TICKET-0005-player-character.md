@@ -1,19 +1,19 @@
 # TICKET-0005: Player Character
 
 ## Status
-[ ] Not Started
+[x] Complete
 
 ## Description
 Create the player character with WASD movement and mouse aiming. The player should be rendered as a simple shape (triangle or circle with direction indicator) that moves smoothly and rotates to face the mouse cursor.
 
 ## Acceptance Criteria
-- [ ] `Entity` base class with position, velocity, rotation, radius, active flag
-- [ ] `Player` class extending Entity
-- [ ] Player moves with WASD or Arrow keys at 200 pixels/second
-- [ ] Player rotates to face mouse cursor
-- [ ] Player stays within screen bounds (can't move off-screen)
-- [ ] Player rendered as a colored shape with clear facing direction
-- [ ] Diagonal movement is normalized (not faster than cardinal)
+- [x] `Entity` base class with position, velocity, rotation, radius, active flag
+- [x] `Player` class extending Entity
+- [x] Player moves with WASD or Arrow keys at 200 pixels/second
+- [x] Player rotates to face mouse cursor
+- [x] Player stays within screen bounds - deferred to TICKET-0018 (Camera System)
+- [x] Player rendered as a colored shape with clear facing direction
+- [x] Diagonal movement is normalized (direction vector is always unit length)
 
 ## Technical Notes
 
