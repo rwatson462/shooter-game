@@ -8,7 +8,7 @@ import {Enemy} from '../core/Enemy.js'
  * @param {Projectile[]} projectiles
  * @param {Enemy[]} enemies
  */
-export const collisionHandler = (player, projectiles, enemies) => {
+export const collisionHandler = (game, player, projectiles, enemies) => {
     for (const p of projectiles) {
         for (const e of enemies) {
             if (!e.active) {
@@ -17,6 +17,10 @@ export const collisionHandler = (player, projectiles, enemies) => {
 
             if (Vector2.distance(p.position, e.position) < e.halfSize) {
                 e.takeDamage(p.damage)
+                if (! e.active) {
+                    // enemy just died
+                    game.addScore(e.scoreValue)
+                }
                 p.active = false
             }
         }

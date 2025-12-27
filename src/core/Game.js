@@ -15,9 +15,11 @@ export class Game {
         this.projectileManager = new ProjectileManager()
         this.renderer = new Renderer(canvas, width, height)
         this.started = false
+        this.score = 0
     }
 
     initLevel() {
+        this.score = 0
         this.player = new Player(this.width/2, this.height/2)
         this.enemies = [
             new Enemy(this.width/2, 100, 20),
@@ -26,6 +28,10 @@ export class Game {
             new Enemy(this.width-100, this.height/2, 20),
         ]
         this.projectileManager.clear()
+    }
+
+    addScore(scoreValue) {
+        this.score += scoreValue
     }
 
     start() {
@@ -59,7 +65,7 @@ export class Game {
             }
         })
 
-        collisionHandler(this.player, this.projectileManager.projectiles, this.enemies)
+        collisionHandler(this, this.player, this.projectileManager.projectiles, this.enemies)
 
         /**
          * RENDER
@@ -80,6 +86,7 @@ export class Game {
 
         // draw the framerate
         this.renderer.drawText(10, 10, `Framerate: ${framerate}`, '#aaa');
+        this.renderer.drawText(10, 50, `Score: ${this.score}`, '#fff');
 
         /**
          * POST RENDER

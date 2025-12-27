@@ -7,6 +7,8 @@ export class Enemy extends Entity {
     constructor(x, y) {
         super(x, y, 50, 2, 20)
 
+        // when killed, this entity is worth these points
+        this.scoreValue = 10
         this.speed = 2
     }
 
@@ -24,7 +26,6 @@ export class Enemy extends Entity {
      * @param {Renderer} renderer
      */
     render(renderer) {
-        // todo: make the enemy a more interesting shape
         const perpendicular = new Vector2(-this.direction.y, this.direction.x)
         const nose = this.position.add(this.direction.multiply(this.halfSize * 1.5));
         const points = [
