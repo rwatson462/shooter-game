@@ -1,7 +1,7 @@
 # TICKET-0010: Score System
 
 ## Status
-[ ] Not Started
+[~] In Progress
 
 ## Description
 Track and display the player's score. Killing enemies awards points.

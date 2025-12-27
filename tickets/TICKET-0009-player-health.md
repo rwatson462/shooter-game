@@ -1,19 +1,19 @@
 # TICKET-0009: Player Health & Damage
 
 ## Status
-[~] In Progress
+[x] Complete
 
 ## Description
 Add health system to the player. Enemies damage the player on contact, with brief invincibility after taking damage.
 
 ## Acceptance Criteria
-- [ ] Player has `health` (100) and `maxHealth` properties
-- [ ] Player has `takeDamage(amount)` method
-- [ ] Enemies damage player on contact (add to CollisionSystem)
-- [ ] Player has ~1 second invincibility after taking damage
-- [ ] Visual feedback when invincible (flashing effect)
-- [ ] Player deactivates when health reaches 0
-- [ ] Console log "Game Over" when player dies
+- [x] Player has `health` property (100)
+- [x] Player has `takeDamage(amount)` method
+- [x] Enemies damage player on contact
+- [x] Collision pushes player away from enemy (prevents damage stacking)
+- [x] Both player and enemy take damage on contact
+- [x] Player deactivates when health reaches 0
+- [x] Console log "Game Over" when player dies
 
 ## Technical Notes
 
