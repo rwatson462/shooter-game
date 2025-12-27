@@ -2,12 +2,11 @@
 
 ## In Progress
 
-- [**0010** - Score System](TICKET-0010-score-system.md)
+- [**0020** - Game States](TICKET-0020-game-states.md)
 
 ## To Do
 
 ### Gameplay (Core Loop)
-- [**0020** - Game States](TICKET-0020-game-states.md)
 - [**0021** - Wave System](TICKET-0021-wave-system.md)
 
 ### Graphics & Polish
@@ -29,6 +28,7 @@
 
 ## Complete
 
+- [**0010** - Score System](TICKET-0010-score-system.md)
 - [**0009** - Player Health & Damage](TICKET-0009-player-health.md)
 - [**0008** - Collision System](TICKET-0008-collision-system.md)
 - [**0007** - Basic Enemy](TICKET-0007-basic-enemy.md)

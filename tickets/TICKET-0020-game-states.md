@@ -1,7 +1,7 @@
 # TICKET-0020: Game States
 
 ## Status
-[ ] Not Started
+[~] In Progress
 
 ## Description
 Implement a state machine to manage game flow: title screen, playing, paused, and game over. This provides the structure for a proper game loop with win/lose conditions.

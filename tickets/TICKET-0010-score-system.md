@@ -1,17 +1,17 @@
 # TICKET-0010: Score System
 
 ## Status
-[~] In Progress
+[x] Complete
 
 ## Description
 Track and display the player's score. Killing enemies awards points.
 
 ## Acceptance Criteria
-- [ ] Game tracks `score` property
-- [ ] `addScore(points)` method on Game
-- [ ] Killing enemies awards their `scoreValue`
-- [ ] Score displayed on screen (simple text for now)
-- [ ] Score persists until game over
+- [x] Game tracks `score` property
+- [x] `addScore(points)` method on Game
+- [x] Killing enemies awards their `scoreValue`
+- [x] Score displayed on screen (simple text for now)
+- [x] Score persists until game over
 
 ## Technical Notes
 
