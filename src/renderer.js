@@ -1,11 +1,11 @@
-import {Game} from "./core/Game.js";
+import {Application} from "./core/Application.js";
 
 const canvas = document.getElementById('canvas');
 
 const WIDTH = 1280;
 const HEIGHT = 720;
 
-const game = new Game(canvas, WIDTH, HEIGHT)
+const application = new Application(canvas, WIDTH, HEIGHT)
 
-game.initLevel()
-game.start()
+application.init()
+application.start()

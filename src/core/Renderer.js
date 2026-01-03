@@ -16,8 +16,10 @@ export class Renderer {
         this.ctx.fillRect(0, 0, this.width, this.height)
     }
 
-    drawText(x, y, text, colour) {
+    drawText(x, y, text, colour, size = '12', align = 'left') {
         this.ctx.fillStyle = colour
+        this.ctx.font = `${size}px monospace`
+        this.ctx.textAlign = align
         this.ctx.fillText(text, x, y)
     }
 

@@ -4,6 +4,7 @@ import {Projectile} from "../core/Projectile.js";
 import {Enemy} from '../core/Enemy.js'
 
 /**
+ * @param {Game} game
  * @param {Player} player
  * @param {Projectile[]} projectiles
  * @param {Enemy[]} enemies
