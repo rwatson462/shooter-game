@@ -10,36 +10,54 @@ A hand-built top-down wave survival shooter using HTML5 Canvas and Electron. No 
 ## Roles
 
 ### Claude (Project Manager)
-- Creates and maintains tickets in `/tickets/`
-- Tracks progress and updates ticket status
+- Creates and maintains issues on GitHub Projects
+- Tracks progress and updates issue status on the Kanban board
 - Answers questions about architecture and implementation
 - Reviews completed work against acceptance criteria
-- Creates new tickets when features are complete
+- Creates new issues when features are complete
 
 ### Developer (You)
-- Implements the code for each ticket
+- Implements the code for each issue
 - Marks when work is ready for review
 - Asks questions when requirements are unclear
-- Decides implementation details within ticket scope
+- Decides implementation details within issue scope
 
 ## Workflow
 
-1. **Pick a ticket** - Check `/tickets/` for the next available ticket
-2. **Implement** - Write the code to meet acceptance criteria
-3. **Report done** - Tell Claude when ready for review
-4. **Review** - Claude checks criteria and updates ticket status
-5. **Next ticket** - Claude creates or assigns the next ticket
+1. **Pick an issue** - Check the [Project Board](https://github.com/users/rwatson462/projects/3) for items in Ready
+2. **Move to In Progress** - Drag the issue to "In Progress" when starting
+3. **Implement** - Write the code to meet acceptance criteria
+4. **Report done** - Tell Claude when ready for review
+5. **Review** - Claude checks criteria and moves to Done
+6. **Next issue** - Claude creates or assigns the next issue
 
-## Ticket Format
+## Issue Tracking
 
-Tickets live in `/tickets/` as markdown files:
-- `TICKET-XXXX-short-name.md` (4-digit numbering)
-- Status: `[ ] Not Started` / `[~] In Progress` / `[x] Complete`
-- Each has acceptance criteria that must pass
+**Project Board:** https://github.com/users/rwatson462/projects/3
 
-## Current Ticket
+### Board Columns
+- **Backlog** - Future work, not yet prioritized
+- **Ready** - Up next, ready to be worked on
+- **In Progress** - Currently being implemented
+- **In Review** - Awaiting review
+- **Done** - Completed
 
-**TICKET-0007: Basic Enemy** - Chaser enemy with edge spawning
+### Labels
+- `gameplay` - Core gameplay features
+- `graphics` - Visual effects and sprites
+- `engine` - Core engine and systems
+- `tooling` - Development tools and workflow
+- `priority:high` - High priority
+- `priority:low` - Low priority / backlog
+
+### Using the GitHub CLI
+```bash
+gh issue list                    # List open issues
+gh issue view <number>           # View issue details
+gh issue create                  # Create new issue
+gh issue close <number>          # Close an issue
+gh project item-list 3 --owner rwatson462  # View project board
+```
 
 ## Commands
 
@@ -52,11 +70,11 @@ npm start      # Run the game
 
 Reminders for Claude when managing this project:
 
-- **Keep tickets small** - Each ticket should be a discrete deliverable, completable in one session
-- **Split large tickets** - If a ticket has 3+ unrelated acceptance criteria, consider splitting
-- **Update BOARD.md** - Keep the board in sync when tickets change status
-- **Review before approving** - Always check code against acceptance criteria
-- **Create tickets proactively** - Don't wait to be asked; identify and create tickets as needed
+- **Keep issues small** - Each issue should be a discrete deliverable, completable in one session
+- **Split large issues** - If an issue has 3+ unrelated acceptance criteria, consider splitting
+- **Use GitHub Projects** - Create issues and manage them on the Kanban board via `gh` CLI
+- **Review before closing** - Always check code against acceptance criteria
+- **Create issues proactively** - Don't wait to be asked; identify and create issues as needed
 - **Graphics come after wireframes** - Get gameplay working with shapes first, polish later
 
 ## Project Structure
@@ -74,6 +92,5 @@ shooter/
 │   ├── weapons/        # Weapon definitions
 │   ├── ui/             # HUD, Menus
 │   └── utils/          # Vector2, helpers
-├── assets/             # Images, audio
-└── tickets/            # Project tickets
+└── assets/             # Images, audio
 ```
