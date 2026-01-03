@@ -1,25 +1,26 @@
 import {InputManager} from "./InputManager.js";
-import {Renderer} from "./Renderer.js";
 import {Player} from "./Player.js";
 import {ProjectileManager} from "./ProjectileManager.js";
 import {Enemy} from "./Enemy.js";
 import {collisionHandler} from "../utils/collisionHandler.js";
+import {Screen} from "./screens/Screen.js";
 
-export class Game {
-    constructor(canvas, width, height) {
-        this.lastFrameTime = 0;
+export class Game extends Screen {
+    /**
+     *
+     * @param {Application} application
+     * @param {InputManager} inputManager
+     * @param {number} width
+     * @param {number} height
+     */
+    constructor(application, inputManager, width, height) {
+        super(application, inputManager, width, height)
 
-        this.width = width
-        this.height = height
-        this.inputManager = new InputManager(canvas)
         this.projectileManager = new ProjectileManager()
-        this.renderer = new Renderer(canvas, width, height)
-        this.started = false
         this.score = 0
     }
 
     initLevel() {
-        this.score = 0
         this.player = new Player(this.width/2, this.height/2)
         this.enemies = [
             new Enemy(this.width/2, 100, 20),
@@ -31,30 +32,15 @@ export class Game {
     }
 
     addScore(scoreValue) {
-        this.score += scoreValue
+        this.application.addToScore(scoreValue)
     }
 
-    start() {
-        this.lastFrameTime = Date.now();
-        this.started = true
-        requestAnimationFrame(this.render.bind(this));
-    }
-
-    stop() {
-        this.started = false
-    }
-
-    render(timestamp) {
-        // for 60 frames per second, this is roughly 16.666667
-        const delta = timestamp - this.lastFrameTime;
-        const framerate = Math.round(1000 / delta)
-
-        /**
-         * UPDATE
-         */
-
+    update(delta) {
         if (this.player.active) {
             this.player.handleUserInput(delta, this.inputManager, this.projectileManager)
+        } else {
+            this.application.setScreen('gameOver')
+            return
         }
 
         this.projectileManager.update(delta)
@@ -67,43 +53,29 @@ export class Game {
 
         collisionHandler(this, this.player, this.projectileManager.projectiles, this.enemies)
 
-        /**
-         * RENDER
-         */
-        this.renderer.clear('#111')
+        if (this.inputManager.isKeyPressed('Escape')) {
+            this.application.setScreen('paused')
+        }
+    }
+
+    render(renderer, delta) {
+        renderer.clear('#111')
 
         if (this.player.active) {
-            this.player.render(this.renderer)
+            this.player.render(renderer)
         }
 
-        this.projectileManager.render(this.renderer)
+        this.projectileManager.render(renderer)
 
         this.enemies.forEach(enemy => {
             if (enemy.active) {
-                enemy.render(this.renderer)
+                enemy.render(renderer)
             }
         })
 
-        // draw the framerate
-        this.renderer.drawText(10, 10, `Framerate: ${framerate}`, '#aaa');
-        this.renderer.drawText(10, 50, `Score: ${this.score}`, '#fff');
-
-        /**
-         * POST RENDER
-         */
-
-        if (this.inputManager.isKeyPressed('Escape')) {
-            // potentially change the screen after this
-            this.stop()
-        }
-
-        // reset the input manager's keyPressed information
-        this.inputManager.endFrame()
-
-        this.lastFrameTime = timestamp;
-        if (this.started) {
-            // only request another frame if we are still running
-            requestAnimationFrame(this.render.bind(this));
-        }
+        // todo: move this to a separate HUD
+        const framerate = Math.round(1000 / delta)
+        renderer.drawText(10, 20, `Framerate: ${framerate}`, '#aaa', '20');
+        renderer.drawText(10, 50, `Score: ${this.application.getScore()}`, '#fff', '20');
     }
 }

@@ -10,7 +10,6 @@ export class Player extends Entity {
         this.health = Math.max(this.health - damage, 0)
 
         if (this.health === 0) {
-            console.log('Game over, motherfucker ❌')
             this.active = false
         }
     }
