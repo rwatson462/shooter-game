@@ -68,7 +68,5 @@ export class Player extends Entity {
             nose.y,
             '#f66'
         )
-
-        renderer.drawText(this.position.x, this.position.y, `${this.health}`, '#fff')
     }
 }

@@ -5,6 +5,7 @@ import {Enemy} from "./Enemy.js";
 import {collisionHandler} from "../utils/collisionHandler.js";
 import {Screen} from "./screens/Screen.js";
 import {WaveManager} from "./WaveManager.js";
+import {HUD} from "./HUD.js";
 
 export class Game extends Screen {
     /**
@@ -19,6 +20,7 @@ export class Game extends Screen {
 
         this.projectileManager = new ProjectileManager()
         this.waveManager = new WaveManager()
+        this.hud = new HUD(application, inputManager, width, height)
         this.enemies = []
     }
 
@@ -58,6 +60,8 @@ export class Game extends Screen {
         }
 
         this.projectileManager.clear()
+
+        this.hud.addLog(`Wave ${this.waveManager.getWave()} started`)
     }
 
     addScore(scoreValue) {
@@ -97,9 +101,13 @@ export class Game extends Screen {
         if (this.inputManager.isKeyPressed('Escape')) {
             this.application.setScreen('paused')
         }
+
+        // todo: we could optimise this to update this when the player health changes
+        this.hud.setPlayerHealth(this.player.health)
+        this.hud.update(delta)
     }
 
-    render(renderer, delta) {
+    render(renderer) {
         renderer.clear('#111')
 
         if (this.player.active) {
@@ -114,10 +122,6 @@ export class Game extends Screen {
             }
         })
 
-        // todo: move this to a separate HUD
-        const framerate = Math.round(1000 / delta)
-        renderer.drawText(10, 20, `Framerate: ${framerate}`, '#aaa', '20');
-        renderer.drawText(10, 50, `Score: ${this.application.getScore()}`, '#fff', '20');
-        renderer.drawText(10, 80, `Enemies: ${this.enemies.length}`, '#bbb', '20');
+        this.hud.render(renderer)
     }
 }
