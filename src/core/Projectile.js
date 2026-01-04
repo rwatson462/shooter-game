@@ -8,9 +8,10 @@ export class Projectile {
      * @param {Vector2} direction
      * @param {number} speed
      * @param {number} damage
-     * @param {Entity} owner
+     * @param {number} lifetime
+     * @param {Weapon} owner
      */
-    constructor(x, y, direction, speed, damage, owner) {
+    constructor(x, y, direction, speed, damage, lifetime, owner) {
         this.position = new Vector2(x, y)
         this.direction = direction
         this.speed = speed
@@ -20,8 +21,8 @@ export class Projectile {
         // I guess we'll need to know who fired the shot to give them points
         this.owner = owner
 
-        // Given a lack of collision system, we'll give bullets a lifetime that when they hit, they'll die
-        this.lifetime = 2000
+        // projectiles have a maximum lifetime, or die when they hit something, whichever comes first
+        this.lifetime = lifetime
         this.active = true
     }
 
@@ -51,6 +52,6 @@ export class Projectile {
             return
         }
 
-        renderer.drawRect(this.position.x, this.position.y, 1, 1, '#ff0')
+        renderer.drawRect(this.position.x, this.position.y, 2, 2, '#f00')
     }
 }

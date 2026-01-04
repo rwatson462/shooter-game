@@ -28,6 +28,11 @@ export class InputManager {
         document.addEventListener('mousemove', evt => this.onMouseMove(evt))
     }
 
+    clear() {
+        this.pressedKeys.clear()
+        this.heldKeys.clear()
+    }
+
     onKeyDown({code}) {
         // if it's not already held, update our lists
         if (!this.heldKeys.has(code)) {
@@ -69,6 +74,10 @@ export class InputManager {
 
     isMouseButtonPressed(button) {
         return this.pressedKeys.has(`Mouse${button}`)
+    }
+
+    isMouseButtonHeld(button) {
+        return this.heldKeys.has(`Mouse${button}`)
     }
 
     getMousePosition() {

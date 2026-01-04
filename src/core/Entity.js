@@ -20,9 +20,6 @@ export class Entity {
 
         this.active = true
         this.health = health
-
-        this.maxBullets = 5
-        this.currentBullets = 0
     }
 
     takeDamage(damage) {
@@ -80,37 +77,5 @@ export class Entity {
         this.position = this.position
             .add(this.direction.multiply(this.speed))
             .add(this.strafe.multiply(3))
-    }
-
-    /**
-     * @param {ProjectileManager} projectileManager
-     */
-    fire(projectileManager) {
-        // check if we're allowed to create a bullet
-        // todo: make this so we can only fire once per second or something
-        if (this.currentBullets >= this.maxBullets) {
-            // not allowed to fire
-            return
-        }
-
-        // if we are, create a bullet
-        // bullet should be created at the gun point
-        // direction of bullet should be same as ship direction
-        // speed needs to be greater than ship (ship speed + bullet speed?)
-        const bullet = new Projectile(
-            this.position.x,
-            this.position.y,
-            this.direction,
-            this.speed+10,
-            5,
-            this
-        )
-
-        projectileManager.add(bullet)
-        this.currentBullets += 1
-    }
-
-    onBulletDeath() {
-        this.currentBullets -= 1
     }
 }
