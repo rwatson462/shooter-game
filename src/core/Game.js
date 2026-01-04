@@ -4,6 +4,7 @@ import {ProjectileManager} from "./ProjectileManager.js";
 import {Enemy} from "./Enemy.js";
 import {collisionHandler} from "../utils/collisionHandler.js";
 import {Screen} from "./screens/Screen.js";
+import {WaveManager} from "./WaveManager.js";
 
 export class Game extends Screen {
     /**
@@ -17,17 +18,45 @@ export class Game extends Screen {
         super(application, inputManager, width, height)
 
         this.projectileManager = new ProjectileManager()
-        this.score = 0
+        this.waveManager = new WaveManager()
+        this.enemies = []
     }
 
     initLevel() {
-        this.player = new Player(this.width/2, this.height/2)
-        this.enemies = [
-            new Enemy(this.width/2, 100, 20),
-            new Enemy(this.width/2, this.height-100, 20),
-            new Enemy(100, this.height/2, 20),
-            new Enemy(this.width-100, this.height/2, 20),
-        ]
+        this.player = new Player(this.width / 2, this.height / 2)
+        this.waveManager.init()
+        this.startNextWave()
+    }
+
+    startNextWave() {
+        const wave = this.waveManager.getWave()
+        const enemyCount = Math.floor(wave * 1.5)
+
+        this.enemies = []
+        for (let e = 0; e < enemyCount; e++) {
+            const edge = Math.floor(Math.random()*4)
+            let x, y
+            switch (edge) {
+                case 0:
+                    x = Math.random() * this.width
+                    y = 0
+                    break
+                case 1:
+                    x = this.width
+                    y = Math.random() * this.height
+                    break
+                case 2:
+                    x = Math.random() * this.width
+                    y = this.height
+                    break
+                case 3:
+                    x = 0
+                    y = Math.random() * this.height
+                    break
+            }
+            this.enemies.push(new Enemy(x,y));
+        }
+
         this.projectileManager.clear()
     }
 
@@ -36,6 +65,18 @@ export class Game extends Screen {
     }
 
     update(delta) {
+        // remove any dead enemies
+        this.enemies = this.enemies.filter(enemy => enemy.active)
+
+        this.waveManager.update(delta)
+        if (this.enemies.length === 0) {
+            this.waveManager.triggerNextWave()
+            if (this.waveManager.nextWaveReady()) {
+                this.startNextWave()
+                this.waveManager.resetWaveCounter()
+            }
+        }
+
         if (this.player.active) {
             this.player.handleUserInput(delta, this.inputManager, this.projectileManager)
         } else {
@@ -77,5 +118,6 @@ export class Game extends Screen {
         const framerate = Math.round(1000 / delta)
         renderer.drawText(10, 20, `Framerate: ${framerate}`, '#aaa', '20');
         renderer.drawText(10, 50, `Score: ${this.application.getScore()}`, '#fff', '20');
+        renderer.drawText(10, 80, `Enemies: ${this.enemies.length}`, '#bbb', '20');
     }
 }
