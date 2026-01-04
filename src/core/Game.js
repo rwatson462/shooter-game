@@ -26,6 +26,8 @@ export class Game extends Screen {
 
     initLevel() {
         this.player = new Player(this.width / 2, this.height / 2)
+        this.projectileManager.clear()
+        this.inputManager.clear()
         this.waveManager.init()
         this.startNextWave()
     }
@@ -58,8 +60,6 @@ export class Game extends Screen {
             }
             this.enemies.push(new Enemy(x,y));
         }
-
-        this.projectileManager.clear()
 
         this.hud.addLog(`Wave ${this.waveManager.getWave()} started`)
     }

@@ -23,6 +23,9 @@ export const collisionHandler = (game, player, projectiles, enemies) => {
                     game.addScore(e.scoreValue)
                 }
                 p.active = false
+
+                // ensure we only "hit" 1 enemy with a projectile
+                break
             }
         }
     }
