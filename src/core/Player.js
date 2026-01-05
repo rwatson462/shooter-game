@@ -3,6 +3,7 @@ import {Vector2} from "../utils/Vector2.js";
 import {PlayerNoseGun} from "./weapons/PlayerNoseGun.js";
 import {PlayerWingGuns} from "./weapons/PlayerWingGuns.js";
 import {PlayerRearGun} from "./weapons/PlayerRearGun.js";
+import {BasicArmour} from "./armour/BasicArmour.js";
 
 export class Player extends Entity {
     constructor(x, y) {
@@ -15,6 +16,8 @@ export class Player extends Entity {
         ]
         this.weaponIndex = 0
         this.weapon = this.weapons[this.weaponIndex]
+
+        this.armour = new BasicArmour()
     }
 
     switchWeapons() {
@@ -27,7 +30,8 @@ export class Player extends Entity {
     }
 
     takeDamage(damage) {
-        this.health = Math.max(this.health - damage, 0)
+        const playerDamage = this.armour.takeDamage(damage)
+        this.health = Math.max(this.health - playerDamage, 0)
 
         if (this.health === 0) {
             this.active = false
