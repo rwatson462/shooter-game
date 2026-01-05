@@ -1,6 +1,5 @@
 import {Vector2} from "../utils/Vector2.js";
 import {clamp} from "../utils/clamp.js";
-import {Projectile} from "./Projectile.js";
 
 export class Entity {
     constructor(x, y, size, maxSpeed, health) {
@@ -9,9 +8,13 @@ export class Entity {
 
         this.speed = 0
         this.maxSpeed = maxSpeed
+        this.angle = 0.0
+        // todo will use these when we have a spiffy sprite to show banking
+        this.turningLeft = false
+        this.turningRight = false
 
         // start pointing up, perhaps make this a parameter later
-        this.direction = new Vector2(0,1)
+        this.direction = new Vector2(1,0)
         this.strafe = new Vector2(0, 0)
 
         // will be used for collision detection and drawing
@@ -43,6 +46,28 @@ export class Entity {
 
     brake() {
         this.speed = clamp(this.speed - 1, -this.maxSpeed, this.maxSpeed)
+    }
+
+    turnLeft(delta) {
+        this.turningLeft = true
+        // todo we might need to tweak this value over time
+        this.angle -= 1/delta
+
+        // ensure we don't do below zero
+        while(this.angle <= 0) {
+            this.angle += 2 * Math.PI
+        }
+    }
+
+    turnRight(delta) {
+        this.turningRight = true
+        // todo we might need to tweak this value over time
+        this.angle += 1/delta
+
+        // ensure we don't go above 360 degrees
+        while(this.angle >= 2 * Math.PI) {
+            this.angle -= 2 * Math.PI
+        }
     }
 
     strafeLeft() {

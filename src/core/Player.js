@@ -40,9 +40,9 @@ export class Player extends Entity {
      * @param {ProjectileManager} projectileManager
      */
     handleUserInput(delta, inputManager, projectileManager) {
-        // todo: introduce a minimum turning circle so the Player doesn't "snap" to point at the mouse
         this.strafe = new Vector2(0, 0)
-        this.pointAt(inputManager.mouseX, inputManager.mouseY)
+        this.turningLeft = false
+        this.turningRight = false
 
         // reduce previous velocities before applying any new modifiers
         this.applyFriction(delta)
@@ -54,17 +54,25 @@ export class Player extends Entity {
         if (inputManager.isKeyHeld('KeyS')) {
             this.brake()
         }
-        // handle strafing
+        if (inputManager.isKeyHeld('KeyA')) {
+            this.turnLeft(delta)
+        }
         if (inputManager.isKeyHeld('KeyD')) {
+            this.turnRight(delta)
+        }
+        if (inputManager.isKeyHeld('KeyE')) {
             this.strafeRight()
         }
-        if (inputManager.isKeyHeld('KeyA')) {
+        if (inputManager.isKeyHeld('KeyQ')) {
             this.strafeLeft()
         }
 
         if (inputManager.isKeyPressed('KeyC')) {
             this.switchWeapons()
         }
+
+        // update direction vector based on current angle
+        this.direction = new Vector2(Math.cos(this.angle), Math.sin(this.angle))
 
         // apply previous movement changes to current position
         this.move()
@@ -82,12 +90,12 @@ export class Player extends Entity {
 
     render(renderer) {
         const perpendicular = new Vector2(-this.direction.y, this.direction.x)
-        const nose = this.position.add(this.direction.multiply(this.halfSize * 1.5));
-        const points = [
-            nose,
-            this.position.add(this.direction.multiply(-this.halfSize)).add(perpendicular.multiply(-this.halfSize)),
-            this.position.add(this.direction.multiply(-this.halfSize)).add(perpendicular.multiply(this.halfSize)),
-        ]
+        const distFromCenter = this.halfSize * 1.25
+        const nose = this.position.add(this.direction.multiply(distFromCenter));
+        const wing1 = this.position.add(this.direction.multiply(-distFromCenter)).add(perpendicular.multiply(-this.halfSize));
+        const wing2 = this.position.add(this.direction.multiply(-distFromCenter)).add(perpendicular.multiply(this.halfSize));
+
+        const points = [nose, wing1, wing2]
         renderer.drawPolygon(points, '#ff0')
 
         // mark the nose so we can clearly see which way we're facing
@@ -97,6 +105,20 @@ export class Player extends Entity {
             nose.x,
             nose.y,
             '#ff0'
+        )
+        renderer.drawLine(
+            this.position.x,
+            this.position.y,
+            wing1.x,
+            wing1.y,
+            '#66f'
+        )
+        renderer.drawLine(
+            this.position.x,
+            this.position.y,
+            wing2.x,
+            wing2.y,
+            '#66f'
         )
     }
 }
