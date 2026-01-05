@@ -104,6 +104,7 @@ export class Game extends Screen {
 
         // todo: we could optimise this to update this when the player health changes
         this.hud.setPlayerHealth(this.player.health)
+        this.hud.setPlayerArmour(this.player.armour?.hitPoints ?? 0)
         this.hud.update(delta)
     }
 

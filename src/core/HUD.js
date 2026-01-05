@@ -7,10 +7,15 @@ export class HUD extends Screen {
         this.log = []
         this.framerate = 0
         this.playerHealth = 0
+        this.playerArmour = 0
     }
 
     setPlayerHealth(value) {
         this.playerHealth = value
+    }
+
+    setPlayerArmour(value) {
+        this.playerArmour = value
     }
 
     setPlayerMaxHealth(value) {
@@ -42,6 +47,7 @@ export class HUD extends Screen {
 
         // todo: show player health bar
         renderer.drawText(10, 80, `Health: ${this.playerHealth}`, '#fff', '20');
+        renderer.drawText(10, 110, `Armour: ${this.playerArmour}`, '#fff', '20');
 
         // text is vertically aligned, so "20px" means -10px -> 10px relative to y position
         // first text, therefore needs to be at position:
