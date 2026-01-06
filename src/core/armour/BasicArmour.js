@@ -1,8 +1,9 @@
 import {Armour} from "./Armour.js";
+import {ArmourType} from "../data.js";
 
 export class BasicArmour extends Armour {
     constructor() {
-        super(50, 0.5)
+        super(ArmourType.Light, 50)
         //
     }
 

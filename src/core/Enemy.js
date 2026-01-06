@@ -2,10 +2,11 @@ import { Renderer} from "./Renderer.js";
 import {Entity} from "./Entity.js";
 import {Vector2} from "../utils/Vector2.js";
 import {Player} from "./Player.js";
+import {BasicArmour} from "./armour/BasicArmour.js";
 
 export class Enemy extends Entity {
     constructor(x, y) {
-        super(x, y, 50, 2, 20)
+        super(x, y, 50, 2, 20, new BasicArmour())
 
         // when killed, this entity is worth these points
         this.scoreValue = 10
@@ -45,5 +46,6 @@ export class Enemy extends Entity {
         )
 
         renderer.drawText(this.position.x, this.position.y, `${this.health}`, '#fff')
+        renderer.drawText(this.position.x, this.position.y+10, `${this.armour.hitPoints}`, '#ddd')
     }
 }

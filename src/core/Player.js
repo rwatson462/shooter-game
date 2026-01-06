@@ -7,7 +7,7 @@ import {BasicArmour} from "./armour/BasicArmour.js";
 
 export class Player extends Entity {
     constructor(x, y) {
-        super(x, y, 20, 5, 100);
+        super(x, y, 20, 5, 100, new BasicArmour());
 
         this.weapons = [
             new PlayerNoseGun(this.position),
@@ -16,8 +16,6 @@ export class Player extends Entity {
         ]
         this.weaponIndex = 0
         this.weapon = this.weapons[this.weaponIndex]
-
-        this.armour = new BasicArmour()
     }
 
     switchWeapons() {
@@ -27,15 +25,6 @@ export class Player extends Entity {
         }
 
         this.weapon = this.weapons[this.weaponIndex]
-    }
-
-    takeDamage(damage) {
-        const playerDamage = this.armour.takeDamage(damage)
-        this.health = Math.max(this.health - playerDamage, 0)
-
-        if (this.health === 0) {
-            this.active = false
-        }
     }
 
     /**
