@@ -1,8 +1,9 @@
 import {Vector2} from "../utils/Vector2.js";
 import {clamp} from "../utils/clamp.js";
+import {ArmourType, DamageMultiplierMatrix} from "./data.js";
 
 export class Entity {
-    constructor(x, y, size, maxSpeed, health) {
+    constructor(x, y, size, maxSpeed, health, armour) {
         // the world-position of the centre of this entity
         this.position = new Vector2(x, y);
 
@@ -23,10 +24,22 @@ export class Entity {
 
         this.active = true
         this.health = health
+        this.armour = armour
     }
 
-    takeDamage(damage) {
-        this.health = Math.max(this.health - damage, 0)
+    /**
+     *
+     * @param {number} damage
+     * @param {number} weaponType
+     */
+    takeDamage(damage, weaponType) {
+        const playerDamage = this.armour.takeDamage(damage, weaponType)
+
+        // also scale damage to player ship
+        const damageMultiplier = DamageMultiplierMatrix[weaponType][ArmourType.None]
+        const reducedDamage = playerDamage * damageMultiplier
+
+        this.health = Math.max(this.health - reducedDamage, 0)
 
         if (this.health === 0) {
             this.active = false

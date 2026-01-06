@@ -1,21 +1,24 @@
+import {DamageMultiplierMatrix} from "../data.js";
 
 export class Armour {
     /**
      *
+     * @param {number} armourType
      * @param {number} hitPoints
-     * @param {number} reductionMultiplier Number between 0 and 1
      */
-    constructor(hitPoints, reductionMultiplier) {
+    constructor(armourType, hitPoints) {
+        this.armourType = armourType
         this.hitPoints = hitPoints
-        this.reductionMultiplier = reductionMultiplier
     }
 
     /**
      * @param {number} damageAmount
+     * @param {number} weaponType
      * @return {number} any damage not taken by the armour
      */
-    takeDamage(damageAmount) {
-        const reducedDamage = damageAmount * this.reductionMultiplier
+    takeDamage(damageAmount, weaponType) {
+        const damageMultiplier = DamageMultiplierMatrix[weaponType][this.armourType]
+        const reducedDamage = damageAmount * damageMultiplier
 
         // armour can tank all the damage
         if (this.hitPoints > reducedDamage) {
@@ -26,7 +29,7 @@ export class Armour {
         }
 
         // armour cannot tank all the damage, deplete the armour
-        const overflow = damageAmount - (this.hitPoints / this.reductionMultiplier)
+        const overflow = damageAmount - (this.hitPoints / damageMultiplier)
         this.hitPoints = 0
         // return any damage the armour couldn't handle
         return overflow

@@ -2,6 +2,7 @@ import {Vector2} from "./Vector2.js";
 import {Player} from "../core/Player.js";
 import {Projectile} from "../core/Projectile.js";
 import {Enemy} from '../core/Enemy.js'
+import {WeaponType} from "../core/data.js";
 
 /**
  * @param {Game} game
@@ -17,7 +18,7 @@ export const collisionHandler = (game, player, projectiles, enemies) => {
             }
 
             if (Vector2.distance(p.position, e.position) < e.halfSize) {
-                e.takeDamage(p.damage)
+                e.takeDamage(p.damage, p.owner.weaponType)
                 if (! e.active) {
                     // enemy just died
                     game.addScore(e.scoreValue)
@@ -39,8 +40,8 @@ export const collisionHandler = (game, player, projectiles, enemies) => {
             // player colliding with enemy
             // move player away from enemy so they are no longer colliding
             // take damage on both player and enemy
-            player.takeDamage(10)
-            e.takeDamage(5)
+            player.takeDamage(10, WeaponType.Collision)
+            e.takeDamage(5, WeaponType.Collision)
 
             // move player directly away from the thing it's colliding with
             player.position = player.position.add(e.position.subtract(player.position).normalise().multiply(-10))
