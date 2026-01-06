@@ -6,20 +6,11 @@ export class HUD extends Screen {
 
         this.log = []
         this.framerate = 0
-        this.playerHealth = 0
-        this.playerArmour = 0
+        this.player = undefined
     }
 
-    setPlayerHealth(value) {
-        this.playerHealth = value
-    }
-
-    setPlayerArmour(value) {
-        this.playerArmour = value
-    }
-
-    setPlayerMaxHealth(value) {
-        this.playerMaxHealth = value
+    setPlayer(player) {
+        this.player = player
     }
 
     addLog(text) {
@@ -43,11 +34,12 @@ export class HUD extends Screen {
 
     render(renderer) {
         renderer.drawText(10, 20, `Framerate: ${this.framerate}`, '#aaa', '20');
-        renderer.drawText(10, 50, `Score: ${this.application.getScore()}`, '#fff', '20');
+        renderer.drawText(10, 50, `Position: [${Math.round(this.player.position.x)}/${Math.round(this.player.position.y)}]`, '#aaa', '20')
+        renderer.drawText(10, 80, `Score: ${this.application.getScore()}`, '#fff', '20');
 
         // todo: show player health bar
-        renderer.drawText(10, 80, `Health: ${this.playerHealth}`, '#fff', '20');
-        renderer.drawText(10, 110, `Armour: ${this.playerArmour}`, '#fff', '20');
+        renderer.drawText(10, 110, `Health: ${this.player.health}`, '#fff', '20');
+        renderer.drawText(10, 140, `Armour: ${this.player.armour?.hitPoints ?? 0}`, '#fff', '20');
 
         // text is vertically aligned, so "20px" means -10px -> 10px relative to y position
         // first text, therefore needs to be at position:

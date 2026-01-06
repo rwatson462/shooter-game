@@ -16,6 +16,15 @@ export class Renderer {
         this.ctx.fillRect(0, 0, this.width, this.height)
     }
 
+    /**
+     * @param {Vector2} point
+     */
+    lockToPoint(point) {
+        const left = point.x - this.width / 2
+        const top = point.y - this.height / 2
+        this.ctx.translate(-left, -top)
+    }
+
     drawText(x, y, text, colour, size = '12', align = 'left') {
         this.ctx.fillStyle = colour
         this.ctx.font = `${size}px monospace`
@@ -47,6 +56,7 @@ export class Renderer {
 
     drawLine(x1, y1, x2, y2, colour) {
         this.ctx.strokeStyle = colour
+        this.ctx.beginPath()
         this.ctx.moveTo(x1, y1)
         this.ctx.lineTo(x2, y2)
         this.ctx.stroke()
