@@ -29,6 +29,7 @@ export class Game extends Screen {
         this.projectileManager.clear()
         this.inputManager.clear()
         this.waveManager.init()
+        this.hud.setPlayer(this.player)
         this.startNextWave()
     }
 
@@ -39,23 +40,25 @@ export class Game extends Screen {
         this.enemies = []
         for (let e = 0; e < enemyCount; e++) {
             const edge = Math.floor(Math.random()*4)
+            const leftEdge = this.player.position.x - this.width / 2
+            const topEdge = this.player.position.y - this.height / 2
             let x, y
             switch (edge) {
-                case 0:
-                    x = Math.random() * this.width
-                    y = 0
+                case 0: // top
+                    x = leftEdge + Math.random() * this.width
+                    y = topEdge - 50
                     break
-                case 1:
-                    x = this.width
-                    y = Math.random() * this.height
+                case 1: // right
+                    x = leftEdge + this.width +  50
+                    y = topEdge + Math.random() * this.height
                     break
-                case 2:
-                    x = Math.random() * this.width
-                    y = this.height
+                case 2: // bottom
+                    x = leftEdge + Math.random() * this.width
+                    y = topEdge + this.height + 50
                     break
-                case 3:
-                    x = 0
-                    y = Math.random() * this.height
+                case 3: // left
+                    x = leftEdge - 50
+                    y = topEdge + Math.random() * this.height
                     break
             }
             this.enemies.push(new Enemy(x,y));
@@ -103,13 +106,12 @@ export class Game extends Screen {
         }
 
         // todo: we could optimise this to update this when the player health changes
-        this.hud.setPlayerHealth(this.player.health)
-        this.hud.setPlayerArmour(this.player.armour?.hitPoints ?? 0)
         this.hud.update(delta)
     }
 
     render(renderer) {
         renderer.clear('#111')
+        renderer.lockToPoint(this.player.position)
 
         if (this.player.active) {
             this.player.render(renderer)
@@ -123,6 +125,7 @@ export class Game extends Screen {
             }
         })
 
+        renderer.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.hud.render(renderer)
     }
 }
