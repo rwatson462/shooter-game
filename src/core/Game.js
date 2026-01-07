@@ -6,6 +6,7 @@ import {collisionHandler} from "../utils/collisionHandler.js";
 import {Screen} from "./screens/Screen.js";
 import {WaveManager} from "./WaveManager.js";
 import {HUD} from "./HUD.js";
+import {StarField} from "./StarField.js";
 
 export class Game extends Screen {
     /**
@@ -21,11 +22,13 @@ export class Game extends Screen {
         this.projectileManager = new ProjectileManager()
         this.waveManager = new WaveManager()
         this.hud = new HUD(application, inputManager, width, height)
+        this.starField = new StarField(width, height)
         this.enemies = []
     }
 
     initLevel() {
         this.player = new Player(this.width / 2, this.height / 2)
+        this.starField.init()
         this.projectileManager.clear()
         this.inputManager.clear()
         this.waveManager.init()
@@ -105,13 +108,18 @@ export class Game extends Screen {
             this.application.setScreen('paused')
         }
 
+        // this.starField.update(this.player.position)
+
         // todo: we could optimise this to update this when the player health changes
         this.hud.update(delta)
     }
 
     render(renderer) {
         renderer.clear('#111')
+        this.starField.render(renderer, this.player.position)
+
         renderer.lockToPoint(this.player.position)
+
 
         if (this.player.active) {
             this.player.render(renderer)
