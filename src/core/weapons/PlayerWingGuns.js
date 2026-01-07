@@ -5,7 +5,7 @@ import {WeaponType} from "../data.js";
 
 export class PlayerWingGuns extends Weapon {
     constructor(position) {
-        super(5, 10, 1000, position, WeaponType.Basic)
+        super(5, 10, 500, position, WeaponType.Basic)
 
         // keep track of previous shot so we can limit when the next shot can be
         this.nextShotDelay = 200
