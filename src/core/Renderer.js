@@ -54,6 +54,11 @@ export class Renderer {
         this.drawPolygon(points, colour)
     }
 
+    fillRect(x, y, w, h, colour) {
+        this.ctx.fillStyle = colour
+        this.ctx.fillRect(x, y, w, h)
+    }
+
     drawLine(x1, y1, x2, y2, colour) {
         this.ctx.strokeStyle = colour
         this.ctx.beginPath()
